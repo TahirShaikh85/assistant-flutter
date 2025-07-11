@@ -106,9 +106,25 @@ class _AssistantPageState extends State<AssistantPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Voice Assistant')),
-      body: Column(
-        children: [
+      backgroundColor: Colors.white,
+  body: Column(
+    children: [
+      Center(
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const SizedBox(height: 20),
+      Image.asset(
+        'assets/actionbar.png',
+        height: 90,
+        width: 180,
+      ),
+    ],
+  ),
+),
+
+        
+    
           Expanded(
             child: ListView.builder(
               itemCount: _messages.length,

@@ -91,7 +91,7 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   Image.asset(
                     'assets/hi.png',
-                    height: 130,
+                    height: 160,
                   ),
                   const SizedBox(height: 10),
                   

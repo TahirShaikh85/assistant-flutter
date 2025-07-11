@@ -39,14 +39,14 @@ class _GoogleLensPageState extends State<GoogleLensPage> {
       context: context,
       builder:
           (_) => Container(
-            color: Colors.black,
+            color: Colors.white,
             child: Wrap(
               children: [
                 ListTile(
                   leading: const Icon(Icons.camera, color: Colors.blue),
                   title: const Text(
                     "Camera",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -57,7 +57,7 @@ class _GoogleLensPageState extends State<GoogleLensPage> {
                   leading: const Icon(Icons.photo, color: Colors.blue),
                   title: const Text(
                     "Gallery",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -108,8 +108,8 @@ class _GoogleLensPageState extends State<GoogleLensPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          "Google Lens",
-          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+          "Google Assistant",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
       ),
@@ -133,9 +133,9 @@ class _GoogleLensPageState extends State<GoogleLensPage> {
                         const Padding(
                           padding: EdgeInsets.only(top: 20),
                           child: Text(
-                            "Image",
+                            "Image Preview",
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.blue, fontSize: 22),
+                            style: TextStyle(color: Colors.black, fontSize: 22 , fontWeight: FontWeight.bold),
                           ),
                         ),
                         GestureDetector(

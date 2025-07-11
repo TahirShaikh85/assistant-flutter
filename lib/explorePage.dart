@@ -184,14 +184,16 @@ class _ExplorePageState extends State<ExplorePage> {
   }
 
   void _openWhatsApp() async {
-    final Uri url = Uri.parse("whatsapp://");
+  final Uri uri = Uri.parse("whatsapp://send?text=Hi");
 
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    } else {
-      print("❌ WhatsApp not installed or can't be opened.");
-    }
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  } else {
+    print("❌ WhatsApp not installed or can't be opened.");
   }
+}
+
+
 
   Future<void> _tellJoke() async {
     try {
@@ -253,82 +255,116 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Explore")),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ListView(
-          children: [
-            Text(
-              greeting,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text("NOW | $date", style: const TextStyle(fontSize: 18)),
-            const SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: const Icon(Icons.cloud),
-                title: Text("$temperature • $city"),
-                subtitle: Text(wind),
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Text("Try it out", style: TextStyle(fontSize: 24)),
-            Wrap(
-              spacing: 10,
-              children: [
-                ActionChip(
-                  label: const Text("Open whatsapp"),
-                  onPressed: _openWhatsApp,
-                ),
-                ActionChip(
-                  label: const Text("Play song"),
-                  onPressed: _playRandomSong,
-                ),
-                ActionChip(
-                  label: const Text("Tell a joke"),
-                  onPressed: _tellJoke,
-                ),
-                ActionChip(
-                  label: const Text("Call someone"),
-                  onPressed: _callSomeone,
-                ),
-                ActionChip(
-                  label: const Text("Read my SMS"),
-                  onPressed: _readSMS,
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            if (currentSong != 'None') ...[
+  backgroundColor: Colors.white,
+  body: Column(
+    children: [
+      Center(
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const SizedBox(height: 20),
+      Image.asset(
+        'assets/actionbar.png',
+        height: 90,
+        width: 180,
+      ),
+    ],
+  ),
+),
+
+        
+      Expanded( // Makes ListView scrollable in remaining space
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+          child: ListView(
+            children: [
               Text(
-                "🎵 Now Playing: $currentSong",
-                style: const TextStyle(fontSize: 16),
+                greeting,
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Text("NOW | $date", style: const TextStyle(fontSize: 18)),
+              const SizedBox(height: 20),
+              Card(
+                color: Colors.blue,
+                elevation: 10,
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.cloud,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    "$temperature • $city",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  subtitle: Text(
+                    wind,
+                    style: const TextStyle(color: Colors.white70),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              const Text("Try it out", style: TextStyle(fontSize: 24)),
+              Wrap(
+                spacing: 10,
                 children: [
-                  IconButton(
-                    icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-                    iconSize: 32,
-                    onPressed: isPlaying ? _pauseSong : _resumeSong,
+                  ActionChip(
+                    label: const Text("Open whatsapp"),
+                    onPressed: _openWhatsApp,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.stop),
-                    iconSize: 32,
-                    onPressed: _stopSong,
+                  ActionChip(
+                    label: const Text("Play song"),
+                    onPressed: _playRandomSong,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.skip_next),
-                    iconSize: 32,
-                    onPressed: _playNextSong,
+                  ActionChip(
+                    label: const Text("Tell a joke"),
+                    onPressed: _tellJoke,
+                  ),
+                  ActionChip(
+                    label: const Text("Call someone"),
+                    onPressed: _callSomeone,
+                  ),
+                  ActionChip(
+                    label: const Text("Read my SMS"),
+                    onPressed: _readSMS,
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
+              if (currentSong != 'None') ...[
+                Text(
+                  "🎵 Now Playing: $currentSong",
+                  style: const TextStyle(fontSize: 16),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                      iconSize: 32,
+                      onPressed: isPlaying ? _pauseSong : _resumeSong,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.stop),
+                      iconSize: 32,
+                      onPressed: _stopSong,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.skip_next),
+                      iconSize: 32,
+                      onPressed: _playNextSong,
+                    ),
+                  ],
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
-    );
+    ],
+  ),
+);
   }
 }
